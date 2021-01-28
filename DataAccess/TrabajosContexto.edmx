@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TrabajosModelos.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CategoriasTrabajos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar(max)" />
+          <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoContratoes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo" Type="nvarchar(max)" />
+          <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TablaTrabajos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TituloTrabajo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ubicacion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Salario" Type="float" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="TipoContratoId" Type="int" Nullable="false" />
+          <Property Name="CategoriaTrabajoId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_MiBaseDeDatos_TablaTrabajos_dbo_CategoriasTrabajos_CategoriaTrabajoId">
+          <End Role="CategoriasTrabajos" Type="Self.CategoriasTrabajos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TablaTrabajos" Type="Self.TablaTrabajos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriasTrabajos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TablaTrabajos">
+              <PropertyRef Name="CategoriaTrabajoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MiBaseDeDatos_TablaTrabajos_dbo_TipoContratoes_TipoContratoId">
+          <End Role="TipoContratoes" Type="Self.TipoContratoes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TablaTrabajos" Type="Self.TablaTrabajos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoContratoes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TablaTrabajos">
+              <PropertyRef Name="TipoContratoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TrabajosModelosStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoriasTrabajos" EntityType="Self.CategoriasTrabajos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoContratoes" EntityType="Self.TipoContratoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TablaTrabajos" EntityType="Self.TablaTrabajos" Schema="MiBaseDeDatos" store:Type="Tables" />
+          <AssociationSet Name="FK_MiBaseDeDatos_TablaTrabajos_dbo_CategoriasTrabajos_CategoriaTrabajoId" Association="Self.FK_MiBaseDeDatos_TablaTrabajos_dbo_CategoriasTrabajos_CategoriaTrabajoId">
+            <End Role="CategoriasTrabajos" EntitySet="CategoriasTrabajos" />
+            <End Role="TablaTrabajos" EntitySet="TablaTrabajos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MiBaseDeDatos_TablaTrabajos_dbo_TipoContratoes_TipoContratoId" Association="Self.FK_MiBaseDeDatos_TablaTrabajos_dbo_TipoContratoes_TipoContratoId">
+            <End Role="TipoContratoes" EntitySet="TipoContratoes" />
+            <End Role="TablaTrabajos" EntitySet="TablaTrabajos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TrabajosModelos" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CategoriasTrabajos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TablaTrabajos" Relationship="Self.FK_MiBaseDeDatos_TablaTrabajos_dbo_CategoriasTrabajos_CategoriaTrabajoId" FromRole="CategoriasTrabajos" ToRole="TablaTrabajos" />
+        </EntityType>
+        <EntityType Name="TipoContratoes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TablaTrabajos" Relationship="Self.FK_MiBaseDeDatos_TablaTrabajos_dbo_TipoContratoes_TipoContratoId" FromRole="TipoContratoes" ToRole="TablaTrabajos" />
+        </EntityType>
+        <EntityType Name="TablaTrabajos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TituloTrabajo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ubicacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salario" Type="Double" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="TipoContratoId" Type="Int32" Nullable="false" />
+          <Property Name="CategoriaTrabajoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CategoriasTrabajos" Relationship="Self.FK_MiBaseDeDatos_TablaTrabajos_dbo_CategoriasTrabajos_CategoriaTrabajoId" FromRole="TablaTrabajos" ToRole="CategoriasTrabajos" />
+          <NavigationProperty Name="TipoContratoes" Relationship="Self.FK_MiBaseDeDatos_TablaTrabajos_dbo_TipoContratoes_TipoContratoId" FromRole="TablaTrabajos" ToRole="TipoContratoes" />
+        </EntityType>
+        <Association Name="FK_MiBaseDeDatos_TablaTrabajos_dbo_CategoriasTrabajos_CategoriaTrabajoId">
+          <End Role="CategoriasTrabajos" Type="Self.CategoriasTrabajos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TablaTrabajos" Type="Self.TablaTrabajos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriasTrabajos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TablaTrabajos">
+              <PropertyRef Name="CategoriaTrabajoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MiBaseDeDatos_TablaTrabajos_dbo_TipoContratoes_TipoContratoId">
+          <End Role="TipoContratoes" Type="Self.TipoContratoes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TablaTrabajos" Type="Self.TablaTrabajos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoContratoes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TablaTrabajos">
+              <PropertyRef Name="TipoContratoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TrabajoConexion" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="CategoriasTrabajos" EntityType="Self.CategoriasTrabajos" />
+          <EntitySet Name="TipoContratoes" EntityType="Self.TipoContratoes" />
+          <EntitySet Name="TablaTrabajos" EntityType="Self.TablaTrabajos" />
+          <AssociationSet Name="FK_MiBaseDeDatos_TablaTrabajos_dbo_CategoriasTrabajos_CategoriaTrabajoId" Association="Self.FK_MiBaseDeDatos_TablaTrabajos_dbo_CategoriasTrabajos_CategoriaTrabajoId">
+            <End Role="CategoriasTrabajos" EntitySet="CategoriasTrabajos" />
+            <End Role="TablaTrabajos" EntitySet="TablaTrabajos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MiBaseDeDatos_TablaTrabajos_dbo_TipoContratoes_TipoContratoId" Association="Self.FK_MiBaseDeDatos_TablaTrabajos_dbo_TipoContratoes_TipoContratoId">
+            <End Role="TipoContratoes" EntitySet="TipoContratoes" />
+            <End Role="TablaTrabajos" EntitySet="TablaTrabajos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TrabajosModelosStoreContainer" CdmEntityContainer="TrabajoConexion">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="TrabajosModelos.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoriasTrabajos">
+            <EntityTypeMapping TypeName="TrabajosModelos.CategoriasTrabajos">
+              <MappingFragment StoreEntitySet="CategoriasTrabajos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoContratoes">
+            <EntityTypeMapping TypeName="TrabajosModelos.TipoContratoes">
+              <MappingFragment StoreEntitySet="TipoContratoes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TablaTrabajos">
+            <EntityTypeMapping TypeName="TrabajosModelos.TablaTrabajos">
+              <MappingFragment StoreEntitySet="TablaTrabajos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TituloTrabajo" ColumnName="TituloTrabajo" />
+                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+                <ScalarProperty Name="Salario" ColumnName="Salario" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="TipoContratoId" ColumnName="TipoContratoId" />
+                <ScalarProperty Name="CategoriaTrabajoId" ColumnName="CategoriaTrabajoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
